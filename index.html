@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoStay SmartDorm | Official Order System</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap');
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .modal-overlay { background: rgba(15, 23, 42, 0.9); backdrop-filter: blur(10px); }
+        .animate-pop { animation: pop 0.4s cubic-bezier(0.17, 0.67, 0.16, 0.99); }
+        @keyframes pop { from { opacity: 0; transform: scale(0.95) translateY(15px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+        .price-card { transition: all 0.3s ease; }
+        .price-card:hover { transform: translateY(-10px); }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 overflow-x-hidden">
+
+    <nav class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-slate-100 h-20 flex items-center px-8 justify-between">
+        <div class="flex items-center space-x-2">
+            <div class="bg-emerald-600 p-2 rounded-xl text-white shadow-lg shadow-emerald-200">
+                <i class="fas fa-microchip text-sm"></i>
+            </div>
+            <span class="text-2xl font-black text-emerald-900 italic tracking-tighter uppercase">EcoStay</span>
+        </div>
+        <button onclick="openModal('STANDARD', 220, 4)" class="bg-emerald-600 text-white px-8 py-3 rounded-full font-bold hover:bg-emerald-700 transition-all shadow-xl shadow-emerald-100 text-sm uppercase tracking-widest">
+            Order Now
+        </button>
+    </nav>
+
+    <section class="py-24 px-6 max-w-7xl mx-auto text-center">
+        <h1 class="text-6xl font-black mb-6 tracking-tight">Investment <span class="text-emerald-600 italic underline decoration-emerald-200">Plans</span></h1>
+        <p class="text-slate-400 mb-20 max-w-2xl mx-auto font-medium">Sistem penjimatan tenaga pintar gred industri untuk asrama kolej & universiti.</p>
+        
+        <div class="grid md:grid-cols-3 gap-8 items-end">
+            <div class="price-card bg-white p-10 rounded-[3rem] border border-slate-100 shadow-sm">
+                <div class="flex justify-center space-x-2 mb-8 text-3xl text-slate-300"><i class="fas fa-user-friends"></i></div>
+                <h3 class="font-black text-2xl mb-1 uppercase tracking-tight">LITE</h3>
+                <p class="text-slate-400 text-[10px] font-bold mb-6 italic uppercase tracking-[0.2em]">2-Pax Room</p>
+                <div class="text-4xl font-black mb-8 text-slate-800 tracking-tighter text-emerald-600">RM 150 <span class="text-xs text-slate-300 font-bold tracking-normal uppercase">/unit</span></div>
+                <button onclick="openModal('LITE', 150, 2)" class="w-full py-4 rounded-2xl bg-slate-50 font-bold hover:bg-emerald-600 hover:text-white transition uppercase text-[10px] tracking-widest">Select Lite</button>
+            </div>
+
+            <div class="price-card bg-white p-12 rounded-[3.5rem] border-[6px] border-emerald-500 shadow-2xl scale-105 relative z-10">
+                <div class="absolute -top-5 left-1/2 -translate-x-1/2 bg-emerald-500 text-white px-6 py-2 rounded-full text-[10px] font-black tracking-widest uppercase shadow-lg shadow-emerald-200">Most Popular</div>
+                <div class="flex justify-center space-x-2 mb-8 text-3xl text-emerald-300"><i class="fas fa-user-friends"></i><i class="fas fa-user-friends"></i></div>
+                <h3 class="font-black text-3xl mb-1 uppercase tracking-tight text-emerald-900">STANDARD</h3>
+                <p class="text-emerald-600 text-[10px] font-bold mb-6 italic uppercase tracking-[0.2em]">4-Pax Room</p>
+                <div class="text-6xl font-black mb-10 text-emerald-600 tracking-tighter">RM 220</div>
+                <button onclick="openModal('STANDARD', 220, 4)" class="w-full py-5 rounded-3xl bg-emerald-600 text-white font-black hover:bg-emerald-700 transition shadow-xl shadow-emerald-200 uppercase text-[10px] tracking-widest">Select Standard</button>
+            </div>
+
+            <div class="price-card bg-white p-10 rounded-[3rem] border border-slate-100 shadow-sm">
+                <div class="flex justify-center space-x-2 mb-8 text-3xl text-slate-300"><i class="fas fa-user-friends"></i><i class="fas fa-user-friends"></i><i class="fas fa-user-friends"></i></div>
+                <h3 class="font-black text-2xl mb-1 uppercase tracking-tight text-slate-900">HEAVY-DUTY</h3>
+                <p class="text-slate-400 text-[10px] font-bold mb-6 italic uppercase tracking-[0.2em]">6-8 Pax Room</p>
+                <div class="text-4xl font-black mb-8 text-slate-800 tracking-tighter text-emerald-600">RM 350 <span class="text-xs text-slate-300 font-bold tracking-normal uppercase">/unit</span></div>
+                <button onclick="openModal('HEAVY-DUTY', 350, 6)" class="w-full py-4 rounded-2xl bg-slate-50 font-bold hover:bg-emerald-600 hover:text-white transition uppercase text-[10px] tracking-widest">Select Heavy</button>
+            </div>
+        </div>
+    </section>
+
+    <div id="orderModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4">
+        <div class="absolute inset-0 modal-overlay" onclick="closeModal()"></div>
+        
+        <div class="bg-white w-full max-w-2xl rounded-[3.5rem] shadow-2xl relative z-10 overflow-hidden animate-pop">
+            <button onclick="closeModal()" class="absolute top-10 right-10 text-slate-200 hover:text-slate-400 transition"><i class="fas fa-times-circle text-2xl"></i></button>
+
+            <div class="p-10 md:p-14" id="modal-body">
+                <div id="form-content">
+                    <div class="mb-10 text-center">
+                        <h2 class="text-4xl font-black text-slate-900 tracking-tight">Confirm <span class="text-emerald-600">Investment</span></h2>
+                        <p class="text-slate-400 text-sm font-medium italic mt-2">Syafi's EcoStay Industrial Energy Solution</p>
+                    </div>
+
+                    <form onsubmit="event.preventDefault(); submitOrder();" class="space-y-8">
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div class="space-y-2">
+                                <label class="text-[10px] font-black uppercase text-slate-400 tracking-[0.2em] ml-2">Client Name</label>
+                                <input type="text" id="custName" required placeholder="Nama Anda" class="w-full px-6 py-4 rounded-2xl border-2 border-slate-50 focus:border-emerald-500 focus:outline-none bg-slate-50 font-bold transition-all">
+                            </div>
+                            <div class="space-y-2">
+                                <label class="text-[10px] font-black uppercase text-slate-400 tracking-[0.2em] ml-2">Contact (WA)</label>
+                                <input type="tel" id="custPhone" required placeholder="01X-XXXXXXX" class="w-full px-6 py-4 rounded-2xl border-2 border-slate-50 focus:border-emerald-500 focus:outline-none bg-slate-50 font-bold transition-all">
+                            </div>
+                        </div>
+
+                        <div class="bg-slate-50 p-8 rounded-[2.5rem] border border-slate-100">
+                            <h4 class="text-xs font-black uppercase text-slate-400 tracking-widest mb-6"><i class="fas fa-plus-circle mr-2 text-emerald-500"></i> Premium Add-Ons</h4>
+                            
+                            <div class="space-y-6">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center space-x-4">
+                                        <div class="p-3 bg-white rounded-xl shadow-sm"><i class="fas fa-id-card text-emerald-600"></i></div>
+                                        <div>
+                                            <p class="text-sm font-black text-slate-800 uppercase">EcoStay X College Lanyard</p>
+                                            <p class="text-[10px] text-emerald-600 font-bold uppercase tracking-tight italic" id="lanyard-hint">Free for first 4 pax</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center space-x-4 bg-white p-2 rounded-xl border border-slate-100 shadow-sm">
+                                        <button type="button" onclick="updateLanyard(-1)" class="w-8 h-8 flex items-center justify-center text-slate-400 hover:text-emerald-600 font-bold transition"><i class="fas fa-minus"></i></button>
+                                        <span id="lanyard-qty" class="font-black text-slate-800 min-w-[20px] text-center">4</span>
+                                        <button type="button" onclick="updateLanyard(1)" class="w-8 h-8 flex items-center justify-center text-slate-400 hover:text-emerald-600 font-bold transition"><i class="fas fa-plus"></i></button>
+                                    </div>
+                                </div>
+
+                                <label class="flex items-center justify-between cursor-pointer group">
+                                    <div class="flex items-center space-x-4">
+                                        <div class="p-3 bg-white rounded-xl shadow-sm"><i class="fas fa-shield-alt text-emerald-600"></i></div>
+                                        <div>
+                                            <p class="text-sm font-black text-slate-800 uppercase italic">Extended 2-Year Warranty</p>
+                                            <p class="text-[10px] text-slate-400 font-bold uppercase tracking-tight">Full hardware replacement (+RM100)</p>
+                                        </div>
+                                    </div>
+                                    <input type="checkbox" id="warranty-check" onchange="calculateGrandTotal()" class="w-6 h-6 rounded-lg border-2 border-slate-200 accent-emerald-600 cursor-pointer">
+                                </label>
+
+                                <div class="flex items-center justify-between opacity-60 grayscale-[0.5]">
+                                    <div class="flex items-center space-x-4">
+                                        <div class="p-3 bg-white rounded-xl shadow-sm"><i class="fas fa-chart-line text-emerald-600"></i></div>
+                                        <div>
+                                            <p class="text-sm font-black text-slate-800 uppercase italic">3-Month Energy Audit</p>
+                                            <p class="text-[10px] text-emerald-600 font-bold uppercase tracking-tight">Free complimentary report</p>
+                                        </div>
+                                    </div>
+                                    <div class="w-6 h-6 rounded-lg bg-emerald-100 flex items-center justify-center text-emerald-600"><i class="fas fa-check text-xs"></i></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="space-y-4">
+                            <label class="text-[10px] font-black uppercase text-slate-400 tracking-[0.2em] ml-2">Select Payment Mode</label>
+                            <div class="grid grid-cols-2 gap-4">
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="payMode" value="full" checked onchange="toggleAnsuran(false)" class="hidden peer">
+                                    <div class="p-5 border-2 border-slate-50 bg-slate-50 rounded-2xl peer-checked:border-emerald-500 peer-checked:bg-emerald-50 transition-all text-center">
+                                        <p class="text-xs font-black uppercase tracking-widest text-slate-400 peer-checked:text-emerald-600">Full Payment</p>
+                                    </div>
+                                </label>
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="payMode" value="installment" onchange="toggleAnsuran(true)" class="hidden peer">
+                                    <div class="p-5 border-2 border-slate-50 bg-slate-50 rounded-2xl peer-checked:border-emerald-500 peer-checked:bg-emerald-50 transition-all text-center">
+                                        <p class="text-xs font-black uppercase tracking-widest text-slate-400 peer-checked:text-emerald-600">Installment</p>
+                                    </div>
+                                </label>
+                            </div>
+
+                            <div id="installment-div" class="hidden animate-pop">
+                                <select id="monthSelect" onchange="calculateGrandTotal()" class="w-full px-6 py-4 rounded-2xl border-2 border-slate-50 bg-slate-50 font-bold uppercase text-xs tracking-widest cursor-pointer">
+                                    <option value="12">12 Months (Standard)</option>
+                                    <option value="24">24 Months (Flexi)</option>
+                                    <option value="36">36 Months (Long Term)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="eco-gradient text-white p-8 rounded-[3rem] shadow-2xl shadow-emerald-200 flex flex-col md:flex-row justify-between items-center text-center md:text-left gap-4" style="background: linear-gradient(135deg, #064e3b 0%, #065f46 100%);">
+                            <div>
+                                <p class="text-[10px] font-black text-emerald-300 uppercase tracking-[0.3em] mb-1" id="total-label">Grand Total Investment</p>
+                                <p id="grandTotalDisplay" class="text-5xl font-black tracking-tighter">RM 0.00</p>
+                            </div>
+                            <button type="submit" class="bg-white text-emerald-900 px-10 py-5 rounded-[2rem] font-black text-sm uppercase tracking-widest hover:bg-emerald-50 transition-all active:scale-95">
+                                Confirm <i class="fas fa-chevron-right ml-2 text-xs opacity-40"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <div id="success-area" class="hidden text-center py-16">
+                    <i class="fas fa-circle-notch fa-spin text-5xl text-emerald-500 mb-8" id="spinner"></i>
+                    <div id="final-msg" class="hidden">
+                        <div class="w-24 h-24 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-8 shadow-inner"><i class="fas fa-check text-4xl"></i></div>
+                        <h2 class="text-4xl font-black text-slate-900 mb-4 tracking-tight uppercase">Order Received!</h2>
+                        <p class="text-slate-400 text-sm italic font-medium max-w-sm mx-auto">Terima kasih, <span id="displayCustName" class="text-emerald-600 font-bold"></span>. Kami akan hubungi anda melalui WhatsApp segera.</p>
+                        <button onclick="closeModal()" class="mt-12 text-[10px] font-black uppercase text-slate-300 hover:text-emerald-600 tracking-[0.4em] transition-all">Close Window</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentPackage = { name: '', basePrice: 0, freePax: 0 };
+        let lanyardQty = 0;
+        let isInstallment = false;
+
+        const modal = document.getElementById('orderModal');
+
+        function openModal(name, price, pax) {
+            currentPackage = { name, basePrice: price, freePax: pax };
+            lanyardQty = pax; // Default lanyard qty based on pax
+            document.getElementById('lanyard-qty').innerText = lanyardQty;
+            document.getElementById('lanyard-hint').innerText = `Free for first ${pax} pax`;
+            
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+            calculateGrandTotal();
+        }
+
+        function closeModal() {
+            modal.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+            // Reset to form view
+            document.getElementById('form-content').classList.remove('hidden');
+            document.getElementById('success-area').classList.add('hidden');
+        }
+
+        function updateLanyard(val) {
+            lanyardQty = Math.max(0, lanyardQty + val);
+            document.getElementById('lanyard-qty').innerText = lanyardQty;
+            calculateGrandTotal();
+        }
+
+        function toggleAnsuran(val) {
+            isInstallment = val;
+            document.getElementById('installment-div').classList.toggle('hidden', !val);
+            document.getElementById('total-label').innerText = val ? 'Monthly Commitment' : 'Grand Total Investment';
+            calculateGrandTotal();
+        }
+
+        function calculateGrandTotal() {
+            // 1. Base Price
+            let total = currentPackage.basePrice;
+
+            // 2. Lanyard Logic
+            let extraLanyards = Math.max(0, lanyardQty - currentPackage.freePax);
+            total += (extraLanyards * 5);
+
+            // 3. Warranty Logic
+            if(document.getElementById('warranty-check').checked) {
+                total += 100;
+            }
+
+            // 4. Installment Logic
+            if(isInstallment) {
+                let months = parseInt(document.getElementById('monthSelect').value);
+                total = total / months;
+            }
+
+            document.getElementById('grandTotalDisplay').innerText = `RM ${total.toFixed(2)}`;
+        }
+
+        function submitOrder() {
+            const name = document.getElementById('custName').value;
+            document.getElementById('displayCustName').innerText = name;
+            
+            document.getElementById('form-content').classList.add('hidden');
+            document.getElementById('success-area').classList.remove('hidden');
+            document.getElementById('spinner').classList.remove('hidden');
+            document.getElementById('final-msg').classList.add('hidden');
+
+            setTimeout(() => {
+                document.getElementById('spinner').classList.add('hidden');
+                document.getElementById('final-msg').classList.remove('hidden');
+            }, 2000);
+        }
+    </script>
+</body>
+</html>
