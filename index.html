@@ -24,6 +24,12 @@
         /* Testimonial Slider */
         .testimonial-container { display: flex; transition: transform 0.5s ease-in-out; }
         .testimonial-slide { min-width: 100%; padding: 20px; }
+
+        /* Tech Icon Animations */
+        .tech-icon { transition: all 0.3s ease; }
+        .tech-card:hover .tech-icon { transform: scale(1.1); filter: drop-shadow(0 0 10px #10b981); }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+        .animate-pulse-slow { animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-900 overflow-x-hidden">
@@ -45,68 +51,101 @@
         <p class="text-slate-400 mb-20 max-w-2xl mx-auto font-medium leading-relaxed">Industrial-grade energy management systems for modern campus living.</p>
         
         <div class="grid md:grid-cols-3 gap-8 items-end">
-            <div onclick="openModal('LITE', 150, 2)" class="cursor-pointer group bg-white p-10 rounded-[3rem] border border-slate-100 shadow-sm hover:border-emerald-500 transition-all">
+            <div onclick="openModal('LITE', 150, 2)" class="cursor-pointer group bg-white p-10 rounded-[3rem] border border-slate-100 shadow-sm hover:border-emerald-500 transition-all hover:shadow-lg">
                 <div class="flex justify-center space-x-2 mb-8 text-3xl text-slate-200 group-hover:text-emerald-500 transition"><i class="fas fa-user-friends"></i></div>
                 <h3 class="font-black text-2xl mb-1 uppercase tracking-widest">LITE</h3>
                 <p class="text-slate-400 text-[10px] font-bold mb-6 italic uppercase tracking-widest">2-Pax Room</p>
-                <div class="text-4xl font-black mb-8 text-emerald-600 font-black">RM 150</div>
+                <div class="text-4xl font-black mb-8 text-emerald-600">RM 150</div>
                 <button class="w-full py-4 rounded-2xl bg-slate-50 font-bold group-hover:bg-emerald-600 group-hover:text-white transition uppercase text-[10px] tracking-widest">Select Lite</button>
             </div>
 
-            <div onclick="openModal('STANDARD', 220, 4)" class="cursor-pointer bg-white p-12 rounded-[3.5rem] border-[6px] border-emerald-500 shadow-2xl scale-105 relative z-10">
-                <div class="absolute -top-5 left-1/2 -translate-x-1/2 bg-emerald-500 text-white px-6 py-2 rounded-full text-[10px] font-black tracking-widest uppercase shadow-lg shadow-emerald-200 font-black">Most Popular</div>
+            <div onclick="openModal('STANDARD', 220, 4)" class="cursor-pointer bg-white p-12 rounded-[3.5rem] border-[6px] border-emerald-500 shadow-2xl scale-105 relative z-10 hover:shadow-emerald-100 transition-all">
+                <div class="absolute -top-5 left-1/2 -translate-x-1/2 bg-emerald-500 text-white px-6 py-2 rounded-full text-[10px] font-black tracking-widest uppercase shadow-lg shadow-emerald-200">Most Popular</div>
                 <div class="flex justify-center space-x-2 mb-8 text-3xl text-emerald-300"><i class="fas fa-user-friends"></i><i class="fas fa-user-friends"></i></div>
                 <h3 class="font-black text-3xl mb-1 uppercase tracking-widest text-emerald-900">STANDARD</h3>
                 <p class="text-emerald-600 text-[10px] font-bold mb-6 italic uppercase tracking-widest">4-Pax Room</p>
-                <div class="text-6xl font-black mb-10 text-emerald-600 tracking-tighter font-black">RM 220</div>
+                <div class="text-6xl font-black mb-10 text-emerald-600 tracking-tighter">RM 220</div>
                 <button class="w-full py-5 rounded-3xl bg-emerald-600 text-white font-black hover:bg-emerald-700 transition shadow-xl shadow-emerald-200 uppercase text-[10px] tracking-widest">Select Standard</button>
             </div>
 
-            <div onclick="openModal('HEAVY-DUTY', 350, 6)" class="cursor-pointer group bg-white p-10 rounded-[3rem] border border-slate-100 shadow-sm hover:border-emerald-500 transition-all">
+            <div onclick="openModal('HEAVY-DUTY', 350, 6)" class="cursor-pointer group bg-white p-10 rounded-[3rem] border border-slate-100 shadow-sm hover:border-emerald-500 transition-all hover:shadow-lg">
                 <div class="flex justify-center space-x-2 mb-8 text-3xl text-slate-200 group-hover:text-emerald-500 transition"><i class="fas fa-user-friends"></i><i class="fas fa-user-friends"></i><i class="fas fa-user-friends"></i></div>
                 <h3 class="font-black text-2xl mb-1 uppercase tracking-widest text-slate-900">HEAVY-DUTY</h3>
                 <p class="text-slate-400 text-[10px] font-bold mb-6 italic uppercase tracking-widest">6-8 Pax Room</p>
-                <div class="text-4xl font-black mb-8 text-emerald-600 font-black">RM 350</div>
+                <div class="text-4xl font-black mb-8 text-emerald-600">RM 350</div>
                 <button class="w-full py-4 rounded-2xl bg-slate-50 font-bold group-hover:bg-emerald-600 group-hover:text-white transition uppercase text-[10px] tracking-widest">Select Heavy</button>
             </div>
         </div>
     </section>
 
-    <section class="py-24 bg-slate-900 text-white">
-        <div class="max-w-7xl mx-auto px-6 text-center">
-            <h2 class="text-4xl font-black mb-16 tracking-tight">Our <span class="text-emerald-400 italic">Engineering</span> Core</h2>
+    <section class="py-24 bg-slate-900 text-white relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 text-center relative z-10">
+            <h2 class="text-4xl font-black mb-20 tracking-tight">Our <span class="text-emerald-400 italic">Engineering</span> Core</h2>
             
-            <div class="grid md:grid-cols-4 gap-8">
-                <div class="space-y-4">
-                    <div class="h-48 rounded-3xl overflow-hidden mb-6 bg-slate-800 flex items-center justify-center p-4">
-                        
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-12">
+                <div class="space-y-4 tech-card group">
+                    <div class="h-32 flex items-center justify-center p-4 tech-icon">
+                        <svg class="w-20 h-20 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect>
+                            <rect x="9" y="9" width="6" height="6"></rect>
+                            <line x1="9" y1="1" x2="9" y2="4"></line>
+                            <line x1="15" y1="1" x2="15" y2="4"></line>
+                            <line x1="9" y1="20" x2="9" y2="23"></line>
+                            <line x1="15" y1="20" x2="15" y2="23"></line>
+                            <line x1="20" y1="9" x2="23" y2="9"></line>
+                            <line x1="20" y1="15" x2="23" y2="15"></line>
+                            <line x1="1" y1="9" x2="4" y2="9"></line>
+                            <line x1="1" y1="15" x2="4" y2="15"></line>
+                        </svg>
                     </div>
                     <h4 class="font-black uppercase tracking-widest text-emerald-400 text-xs">Industrial MCU</h4>
-                    <p class="text-slate-400 text-sm leading-relaxed">High-stability processing for 24/7 campus operations.</p>
+                    <p class="text-slate-400 text-sm leading-relaxed px-2">High-stability processing for 24/7 campus operations.</p>
                 </div>
-                <div class="space-y-4">
-                    <div class="h-48 rounded-3xl overflow-hidden mb-6 bg-slate-800 flex items-center justify-center p-4">
-                        
+
+                <div class="space-y-4 tech-card group">
+                    <div class="h-32 flex items-center justify-center p-4 tech-icon">
+                        <svg class="w-20 h-20 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path>
+                            <line x1="12" y1="2" x2="12" y2="12" class="group-hover:animate-pulse"></line>
+                            <circle cx="12" cy="12" r="1" fill="currentColor"></circle>
+                        </svg>
                     </div>
-                    <h4 class="font-black uppercase tracking-widest text-emerald-400 text-xs">32A Contactors</h4>
-                    <p class="text-slate-400 text-sm leading-relaxed">Heavy-duty components to handle industrial electrical loads.</p>
+                    <h4 class="font-black uppercase tracking-widest text-emerald-400 text-xs">Heavy-Duty Contactor</h4>
+                    <p class="text-slate-400 text-sm leading-relaxed px-2">Industrial switching components to handle large electrical loads safely.</p>
                 </div>
-                <div class="space-y-4">
-                    <div class="h-48 rounded-3xl overflow-hidden mb-6 bg-slate-800 flex items-center justify-center p-4">
-                        
+
+                <div class="space-y-4 tech-card group">
+                    <div class="h-32 flex items-center justify-center p-4 tech-icon relative">
+                        <svg class="w-20 h-20 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="4" width="18" height="16" rx="2"></rect>
+                            <line x1="7" y1="8" x2="17" y2="8"></line>
+                            <line x1="7" y1="12" x2="17" y2="12"></line>
+                            <line x1="7" y1="16" x2="13" y2="16"></line>
+                        </svg>
+                        <svg class="absolute w-12 h-12 text-emerald-300 top-0 right-10 animate-pulse-slow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 2a10 10 0 0 1 10 10"></path>
+                            <path d="M12 6a6 6 0 0 1 6 6"></path>
+                        </svg>
                     </div>
-                    <h4 class="font-black uppercase tracking-widest text-emerald-400 text-xs">RFID Recognition</h4>
-                    <p class="text-slate-400 text-sm leading-relaxed">Rapid 13.56MHz card detection for secure access.</p>
+                    <h4 class="font-black uppercase tracking-widest text-emerald-400 text-xs">RFID UID Recognition</h4>
+                    <p class="text-slate-400 text-sm leading-relaxed px-2">Rapid 13.56MHz matrix card detection for secure access.</p>
                 </div>
-                <div class="space-y-4">
-                    <div class="h-48 rounded-3xl overflow-hidden mb-6 bg-slate-800 flex items-center justify-center p-4">
-                        
+
+                <div class="space-y-4 tech-card group">
+                    <div class="h-32 flex items-center justify-center p-4 tech-icon">
+                        <svg class="w-20 h-20 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                            <line x1="8" y1="21" x2="16" y2="21"></line>
+                            <line x1="12" y1="17" x2="12" y2="21"></line>
+                            <text x="6" y="11" fill="currentColor" font-size="3" font-weight="bold" class="animate-pulse">ACTIVE</text>
+                        </svg>
                     </div>
                     <h4 class="font-black uppercase tracking-widest text-emerald-400 text-xs">OLED Indicator</h4>
-                    <p class="text-slate-400 text-sm leading-relaxed">Real-time status display for monitoring occupancy.</p>
+                    <p class="text-slate-400 text-sm leading-relaxed px-2">Real-time external digital status display for occupancy monitoring.</p>
                 </div>
             </div>
         </div>
+        <div class="absolute inset-0 opacity-5" style="background-image: linear-gradient(#1e293b 1px, transparent 1px), linear-gradient(90deg, #1e293b 1px, transparent 1px); background-size: 20px 20px;"></div>
     </section>
 
     <section class="py-24 bg-white overflow-hidden">
@@ -165,7 +204,7 @@
                             </div>
                             <div class="dropdown-options" id="pkgOptions">
                                 <div class="dropdown-option" onclick="selectPkg('LITE', 150, 2)">LITE Pack (2-Pax) - RM 150</div>
-                                <div class="dropdown-option" onclick="selectPkg('STANDARD', 220, 4)">STANDARD Pack (4-Pax) - RM 220</div>
+                                <div class="dropdown-option active" onclick="selectPkg('STANDARD', 220, 4)">STANDARD Pack (4-Pax) - RM 220</div>
                                 <div class="dropdown-option" onclick="selectPkg('HEAVY-DUTY', 350, 6)">HEAVY-DUTY Pack (6-8 Pax) - RM 350</div>
                             </div>
                         </div>
@@ -234,6 +273,7 @@
         // Slider Logic
         function moveSlide(n) {
             const s = document.getElementById('slider');
+            if(!s) return;
             sIdx = (sIdx + n + 3) % 3;
             s.style.transform = `translateX(-${sIdx * 100}%)`;
         }
