@@ -1,4 +1,4 @@
-/* Modern UI Styles */
+/* Custom Scrollbar & Dropdowns */
 .custom-dropdown { position: relative; width: 100%; cursor: pointer; }
 .dropdown-selected { background: #f8fafc; border: 2px solid #f1f5f9; padding: 1rem 1.5rem; border-radius: 1.2rem; display: flex; justify-content: space-between; align-items: center; font-weight: 800; transition: 0.2s; }
 .dropdown-options { position: absolute; top: 110%; left: 0; right: 0; background: white; border-radius: 1.2rem; box-shadow: 0 10px 30px rgba(0,0,0,0.1); display: none; z-index: 70; border: 1px solid #f1f5f9; overflow: hidden; }
@@ -6,14 +6,13 @@
 .dropdown-option:hover { background: #ecfdf5; color: #059669; padding-left: 2rem; }
 .show { display: block; animation: pop 0.2s ease-out; }
 
-/* Testimonials */
-.testimonial-container { display: flex; transition: transform 0.5s ease-in-out; }
-.testimonial-slide { min-width: 100%; padding: 20px; }
-
-/* Engineering Hover */
-.tech-card:hover .tech-icon { transform: translateY(-10px); }
-.tech-icon { transition: all 0.4s ease; }
-
+/* Animations */
 @keyframes pop { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+.animate-pop { animation: pop 0.3s ease-out; }
 
-@media print { .no-print { display: none !important; } }
+/* Invois Table Style */
+#invoice-rows tr { border-bottom: 1px solid #f1f5f9; }
+#invoice-rows td { padding: 1rem; }
+
+/* Utility */
+.no-print { display: block; }
