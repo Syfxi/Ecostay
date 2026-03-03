@@ -71,7 +71,10 @@ function calculateGrandTotal() {
     return total;
 }
 
-function goToStep2() { document.getElementById('step-1-form').classList.add('hidden'); document.getElementById('step-2-form').classList.remove('hidden'); }
+function goToStep2() { 
+    document.getElementById('step-1-form').classList.add('hidden'); 
+    document.getElementById('step-2-form').classList.remove('hidden'); 
+}
 
 function backToStep1() {
     document.getElementById('step-2-form').classList.add('hidden');
@@ -88,7 +91,7 @@ function generateInvoice() {
     const rQ = parseInt(document.getElementById('roomQty').value);
     const total = calculateGrandTotal();
     const date = new Date();
-    document.getElementById('inv-id').innerText = `INV-${date.getFullYear()}-${Math.floor(Math.random()*9000+1000)}`;
+    document.getElementById('inv-id').innerText = `ECO-INV-${date.getFullYear()}-${Math.floor(Math.random()*9000+1000)}`;
     document.getElementById('inv-date').innerText = date.toLocaleDateString('en-GB');
     document.getElementById('out-name').innerText = document.getElementById('billName').value;
     document.getElementById('out-email').innerText = document.getElementById('billEmail').value;
@@ -97,13 +100,26 @@ function generateInvoice() {
     document.getElementById('out-total').innerText = `RM ${total.toFixed(2)}`;
     document.getElementById('final-label').innerText = isI ? `Monthly Payment (${iD}m)` : 'Grand Total';
 
-    let rows = `<tr><td style="padding: 16px;">${curK} Industrial Smart Unit</td><td style="text-align: center;">${rQ}</td><td style="text-align: right; padding: 16px;">RM ${(pkgData[curK].p * rQ).toFixed(2)}</td></tr>`;
+    let rows = `<tr class="border-b border-slate-50"><td class="py-4 px-4">${curK} Industrial Smart Unit</td><td class="text-center font-black">${rQ}</td><td class="text-right px-4 font-black">RM ${(pkgData[curK].p * rQ).toFixed(2)}</td></tr>`;
     let extraL = Math.max(0, lQty - pkgData[curK].f);
-    if(extraL > 0) rows += `<tr><td style="padding: 16px;">Custom Lanyard Add-on</td><td style="text-align: center;">${extraL * rQ}</td><td style="text-align: right; padding: 16px;">RM ${(extraL * 5 * rQ).toFixed(2)}</td></tr>`;
-    if(document.getElementById('w-check').checked) rows += `<tr><td style="padding: 16px;">Extended Warranty (2-Year)</td><td style="text-align: center;">${rQ}</td><td style="text-align: right; padding: 16px;">RM ${(100 * rQ).toFixed(2)}</td></tr>`;
+    if(extraL > 0) rows += `<tr class="border-b border-slate-50"><td class="py-4 px-4">Custom Lanyard Add-on</td><td class="text-center font-black">${extraL * rQ}</td><td class="text-right px-4 font-black">RM ${(extraL * 5 * rQ).toFixed(2)}</td></tr>`;
+    if(document.getElementById('w-check').checked) rows += `<tr class="border-b border-slate-50"><td class="py-4 px-4">Extended Warranty (2-Year)</td><td class="text-center font-black">${rQ}</td><td class="text-right px-4 font-black">RM ${(100 * rQ).toFixed(2)}</td></tr>`;
 
     document.getElementById('invoice-rows').innerHTML = rows;
     document.getElementById('invoice-area').classList.remove('hidden');
+}
+
+// FIX PDF KOSONG - System Download Otomatis
+function downloadPDF() {
+    const element = document.getElementById('invoice-print-area');
+    const opt = {
+        margin:       10,
+        filename:     'ECOSTAY_OFFICIAL_INVOICE.pdf',
+        image:        { type: 'jpeg', quality: 0.98 },
+        html2canvas:  { scale: 2, useCORS: true },
+        jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+    };
+    html2pdf().set(opt).from(element).save();
 }
 
 window.onclick = function(e) { if (!e.target.closest('.custom-dropdown')) { document.querySelectorAll('.dropdown-options').forEach(o => o.classList.remove('show')); } }
