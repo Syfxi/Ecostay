@@ -1,9 +1,5 @@
 /* Custom Modern Dropdowns */
-.custom-dropdown {
-    position: relative;
-    width: 100%;
-    cursor: pointer;
-}
+.custom-dropdown { position: relative; width: 100%; cursor: pointer; }
 
 .dropdown-selected {
     background: #f8fafc;
@@ -14,23 +10,17 @@
     justify-content: space-between;
     align-items: center;
     font-weight: 700;
-    transition: 0.3s cubic-bezier(0.17, 0.67, 0.16, 0.99);
-}
-
-.custom-dropdown:focus-within .dropdown-selected {
-    border-color: #10b981;
-    background: white;
-    box-shadow: 0 10px 15px -3px rgba(16, 185, 129, 0.1);
+    transition: 0.2s;
 }
 
 .dropdown-options {
     position: absolute;
-    top: 115%;
+    top: 110%;
     left: 0;
     right: 0;
     background: white;
     border-radius: 1.2rem;
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
     display: none;
     z-index: 70;
     border: 1px solid #f1f5f9;
@@ -38,49 +28,33 @@
 }
 
 .dropdown-option {
-    padding: 1.2rem 1.5rem;
+    padding: 1rem 1.5rem;
     font-size: 0.875rem;
     font-weight: 600;
     transition: 0.2s;
-    border-bottom: 1px solid #f8fafc;
 }
 
-.dropdown-option:last-child {
-    border-bottom: none;
-}
+.dropdown-option:hover { background: #ecfdf5; color: #059669; }
+.dropdown-option.active { background: #10b981; color: white; }
+.show { display: block; animation: pop 0.2s ease-out; }
 
-.dropdown-option:hover {
-    background: #ecfdf5;
-    color: #059669;
-    padding-left: 2rem;
-}
-
-.dropdown-option.active {
-    background: #10b981;
-    color: white;
-}
-
-.show {
-    display: block;
-}
-
-/* Printing logic */
+/* FIX: Logic for PDF Printing */
 @media print {
     body * { visibility: hidden !important; }
-    #invoice-print-area, #invoice-print-area * { visibility: visible !important; }
-    #invoice-print-area { 
-        position: absolute; 
-        left: 0; 
-        top: 0; 
-        width: 100% !important; 
-        padding: 0 !important;
+    #invoice-area, #invoice-area *, #invoice-print-area, #invoice-print-area * { 
+        visibility: visible !important; 
+    }
+    #invoice-print-area {
+        position: absolute !important;
+        left: 0 !important;
+        top: 0 !important;
+        width: 100% !important;
+        padding: 40px !important;
         border: none !important;
         box-shadow: none !important;
+        background: white !important;
     }
     .no-print { display: none !important; }
 }
 
-/* Hover Effects */
-.price-card:hover {
-    transform: translateY(-10px);
-}
+@keyframes pop { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
