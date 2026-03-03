@@ -1,7 +1,7 @@
 const pkgData = { "LITE": { p: 150, f: 2 }, "STANDARD": { p: 220, f: 4 }, "HEAVY-DUTY": { p: 350, f: 6 } };
 let curK = "STANDARD", lQty = 4, isI = false, iD = 12, sIdx = 0;
 
-// Slider Logic - Ensures reviews are visible and slide
+// Slider Logic
 function moveSlide(n) {
     const s = document.getElementById('slider');
     if (!s) return;
@@ -88,7 +88,7 @@ function generateInvoice() {
     const rQ = parseInt(document.getElementById('roomQty').value);
     const total = calculateGrandTotal();
     const date = new Date();
-    document.getElementById('inv-id').innerText = `RNSS-INV-${date.getFullYear()}-${Math.floor(Math.random()*9000+1000)}`;
+    document.getElementById('inv-id').innerText = `INV-${date.getFullYear()}-${Math.floor(Math.random()*9000+1000)}`;
     document.getElementById('inv-date').innerText = date.toLocaleDateString('en-GB');
     document.getElementById('out-name').innerText = document.getElementById('billName').value;
     document.getElementById('out-email').innerText = document.getElementById('billEmail').value;
@@ -97,10 +97,10 @@ function generateInvoice() {
     document.getElementById('out-total').innerText = `RM ${total.toFixed(2)}`;
     document.getElementById('final-label').innerText = isI ? `Monthly Payment (${iD}m)` : 'Grand Total';
 
-    let rows = `<tr><td class="py-4 px-4 border-b">${curK} Industrial Smart Unit</td><td class="text-center border-b">${rQ}</td><td class="text-right px-4 border-b">RM ${(pkgData[curK].p * rQ).toFixed(2)}</td></tr>`;
+    let rows = `<tr><td style="padding: 16px;">${curK} Industrial Smart Unit</td><td style="text-align: center;">${rQ}</td><td style="text-align: right; padding: 16px;">RM ${(pkgData[curK].p * rQ).toFixed(2)}</td></tr>`;
     let extraL = Math.max(0, lQty - pkgData[curK].f);
-    if(extraL > 0) rows += `<tr><td class="py-4 px-4 border-b">Custom Lanyard Add-on</td><td class="text-center border-b">${extraL * rQ}</td><td class="text-right px-4 border-b">RM ${(extraL * 5 * rQ).toFixed(2)}</td></tr>`;
-    if(document.getElementById('w-check').checked) rows += `<tr><td class="py-4 px-4 border-b">Extended Warranty (2-Year)</td><td class="text-center border-b">${rQ}</td><td class="text-right px-4 border-b">RM ${(100 * rQ).toFixed(2)}</td></tr>`;
+    if(extraL > 0) rows += `<tr><td style="padding: 16px;">Custom Lanyard Add-on</td><td style="text-align: center;">${extraL * rQ}</td><td style="text-align: right; padding: 16px;">RM ${(extraL * 5 * rQ).toFixed(2)}</td></tr>`;
+    if(document.getElementById('w-check').checked) rows += `<tr><td style="padding: 16px;">Extended Warranty (2-Year)</td><td style="text-align: center;">${rQ}</td><td style="text-align: right; padding: 16px;">RM ${(100 * rQ).toFixed(2)}</td></tr>`;
 
     document.getElementById('invoice-rows').innerHTML = rows;
     document.getElementById('invoice-area').classList.remove('hidden');
