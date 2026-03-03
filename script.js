@@ -1,7 +1,6 @@
 const pkgData = { "LITE": { p: 150, f: 2 }, "STANDARD": { p: 220, f: 4 }, "HEAVY-DUTY": { p: 350, f: 6 } };
 let curK = "STANDARD", lQty = 4, isI = false, iD = 12, sIdx = 0;
 
-// Slider Logic
 function moveSlide(n) {
     const s = document.getElementById('slider');
     if (!s) return;
@@ -10,7 +9,6 @@ function moveSlide(n) {
 }
 setInterval(() => moveSlide(1), 5000);
 
-// Modal Logic
 function openModal(k, p, f) {
     curK = k; lQty = f;
     document.getElementById('pkgValue').innerText = `${k} Pack - RM ${p}/unit`;
@@ -71,11 +69,7 @@ function calculateGrandTotal() {
     return total;
 }
 
-function goToStep2() { 
-    document.getElementById('step-1-form').classList.add('hidden'); 
-    document.getElementById('step-2-form').classList.remove('hidden'); 
-}
-
+function goToStep2() { document.getElementById('step-1-form').classList.add('hidden'); document.getElementById('step-2-form').classList.remove('hidden'); }
 function backToStep1() {
     document.getElementById('step-2-form').classList.add('hidden');
     document.getElementById('invoice-area').classList.add('hidden');
@@ -100,24 +94,23 @@ function generateInvoice() {
     document.getElementById('out-total').innerText = `RM ${total.toFixed(2)}`;
     document.getElementById('final-label').innerText = isI ? `Monthly Payment (${iD}m)` : 'Grand Total';
 
-    let rows = `<tr class="border-b border-slate-50"><td class="py-4 px-4">${curK} Industrial Smart Unit</td><td class="text-center font-black">${rQ}</td><td class="text-right px-4 font-black">RM ${(pkgData[curK].p * rQ).toFixed(2)}</td></tr>`;
+    let rows = `<tr style="border-bottom:1px solid #eee"><td style="padding:12px">${curK} Industrial Smart Unit</td><td style="text-align:center">${rQ}</td><td style="text-align:right;padding:12px">RM ${(pkgData[curK].p * rQ).toFixed(2)}</td></tr>`;
     let extraL = Math.max(0, lQty - pkgData[curK].f);
-    if(extraL > 0) rows += `<tr class="border-b border-slate-50"><td class="py-4 px-4">Custom Lanyard Add-on</td><td class="text-center font-black">${extraL * rQ}</td><td class="text-right px-4 font-black">RM ${(extraL * 5 * rQ).toFixed(2)}</td></tr>`;
-    if(document.getElementById('w-check').checked) rows += `<tr class="border-b border-slate-50"><td class="py-4 px-4">Extended Warranty (2-Year)</td><td class="text-center font-black">${rQ}</td><td class="text-right px-4 font-black">RM ${(100 * rQ).toFixed(2)}</td></tr>`;
+    if(extraL > 0) rows += `<tr style="border-bottom:1px solid #eee"><td style="padding:12px">Extra Lanyards (Custom Branded)</td><td style="text-align:center">${extraL * rQ}</td><td style="text-align:right;padding:12px">RM ${(extraL * 5 * rQ).toFixed(2)}</td></tr>`;
+    if(document.getElementById('w-check').checked) rows += `<tr style="border-bottom:1px solid #eee"><td style="padding:12px">Extended Warranty (2-Year)</td><td style="text-align:center">${rQ}</td><td style="text-align:right;padding:12px">RM ${(100 * rQ).toFixed(2)}</td></tr>`;
+    rows += `<tr><td style="padding:12px">3-Month Energy Audit Report</td><td style="text-align:center">${rQ}</td><td style="text-align:right;padding:12px">FREE</td></tr>`;
 
     document.getElementById('invoice-rows').innerHTML = rows;
     document.getElementById('invoice-area').classList.remove('hidden');
 }
 
-// FIX PDF KOSONG - System Download Otomatis
 function downloadPDF() {
     const element = document.getElementById('invoice-print-area');
     const opt = {
-        margin:       10,
-        filename:     'ECOSTAY_OFFICIAL_INVOICE.pdf',
-        image:        { type: 'jpeg', quality: 0.98 },
-        html2canvas:  { scale: 2, useCORS: true },
-        jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+        margin: 10, filename: 'ECOSTAY_OFFICIAL_INVOICE.pdf',
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2, useCORS: true },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
     };
     html2pdf().set(opt).from(element).save();
 }
