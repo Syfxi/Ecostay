@@ -24,23 +24,25 @@
     </nav>
 
     <section class="py-24 px-6 max-w-7xl mx-auto text-center no-print">
-        <h1 class="text-6xl font-black mb-6 tracking-tight text-slate-900">Purchase <span class="text-emerald-600 italic underline decoration-emerald-200">Plans</span></h1>
-        <p class="text-slate-400 mb-20 max-w-2xl mx-auto font-medium">Industrial Energy Management Solutions for Modern Institutions.</p>
+        <h1 class="text-6xl font-black mb-6 tracking-tight">Purchase <span class="text-emerald-600 italic underline decoration-emerald-200 font-black">Plans</span></h1>
+        <p class="text-slate-400 mb-20 max-w-2xl mx-auto font-medium">Official Industrial Energy Management Solutions for Modern Institutions.</p>
         
         <div class="grid md:grid-cols-3 gap-8 items-end">
-            <div onclick="openModal('LITE', 150, 2)" class="cursor-pointer group bg-white p-10 rounded-[3rem] border border-slate-100 shadow-sm hover:border-emerald-500 transition-all">
+            <div onclick="openModal('LITE', 150, 2)" class="price-card group bg-white p-10 rounded-[3rem] border border-slate-100 shadow-sm hover:border-emerald-500 transition-all cursor-pointer">
                 <div class="flex justify-center space-x-2 mb-8 text-3xl text-slate-200 group-hover:text-emerald-500 transition"><i class="fas fa-user-friends"></i></div>
                 <h3 class="font-black text-2xl mb-1 uppercase tracking-widest">LITE</h3>
                 <div class="text-4xl font-black mb-8 text-emerald-600">RM 150</div>
                 <button class="w-full py-4 rounded-2xl bg-slate-50 font-bold group-hover:bg-emerald-600 group-hover:text-white transition uppercase text-[10px] tracking-widest">Select Lite</button>
             </div>
-            <div onclick="openModal('STANDARD', 220, 4)" class="cursor-pointer bg-white p-12 rounded-[3.5rem] border-[6px] border-emerald-500 shadow-2xl scale-105 relative z-10">
+
+            <div onclick="openModal('STANDARD', 220, 4)" class="price-card bg-white p-12 rounded-[3.5rem] border-[6px] border-emerald-500 shadow-2xl scale-105 relative z-10 cursor-pointer">
                 <div class="absolute -top-5 left-1/2 -translate-x-1/2 bg-emerald-500 text-white px-6 py-2 rounded-full text-[10px] font-black tracking-widest uppercase shadow-lg shadow-emerald-200">Most Popular</div>
                 <h3 class="font-black text-3xl mb-1 uppercase tracking-widest text-emerald-900 font-black">STANDARD</h3>
                 <div class="text-6xl font-black mb-10 text-emerald-600 tracking-tighter">RM 220</div>
                 <button class="w-full py-5 rounded-3xl bg-emerald-600 text-white font-black hover:bg-emerald-700 transition shadow-xl shadow-emerald-200 uppercase text-[10px] tracking-widest">Select Standard</button>
             </div>
-            <div onclick="openModal('HEAVY-DUTY', 350, 6)" class="cursor-pointer group bg-white p-10 rounded-[3rem] border border-slate-100 shadow-sm hover:border-emerald-500 transition-all">
+
+            <div onclick="openModal('HEAVY-DUTY', 350, 6)" class="price-card group bg-white p-10 rounded-[3rem] border border-slate-100 shadow-sm hover:border-emerald-500 transition-all cursor-pointer">
                 <div class="flex justify-center space-x-2 mb-8 text-3xl text-slate-200 group-hover:text-emerald-500 transition"><i class="fas fa-user-friends"></i><i class="fas fa-user-friends"></i><i class="fas fa-user-friends"></i></div>
                 <h3 class="font-black text-2xl mb-1 uppercase tracking-widest text-slate-900 font-black">HEAVY-DUTY</h3>
                 <div class="text-4xl font-black mb-8 text-emerald-600 font-black">RM 350</div>
@@ -54,24 +56,32 @@
             <h2 class="text-4xl font-black mb-20 tracking-tight italic">Engineering <span class="text-emerald-400 font-black">Core</span></h2>
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
                 <div class="space-y-4 tech-card group">
-                    <div class="h-32 flex items-center justify-center p-4 tech-icon"><svg class="w-16 h-16 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line></svg></div>
+                    <div class="h-32 flex items-center justify-center p-4 tech-icon transition-all duration-500 rounded-3xl">
+                        <svg class="w-16 h-16 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line></svg>
+                    </div>
                     <h4 class="font-black uppercase tracking-widest text-emerald-400 text-xs">Industrial MCU</h4>
-                    <p class="text-slate-400 text-sm px-4">High-stability processing core for reliable 24/7 campus operations.</p>
+                    <p class="text-slate-400 text-sm px-4">High-stability core for reliable 24/7 operations.</p>
                 </div>
                 <div class="space-y-4 tech-card group">
-                    <div class="h-32 flex items-center justify-center p-4 tech-icon"><svg class="w-16 h-16 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path><line x1="12" y1="2" x2="12" y2="12"></line></svg></div>
+                    <div class="h-32 flex items-center justify-center p-4 tech-icon transition-all duration-500 rounded-3xl">
+                        <svg class="w-16 h-16 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path><line x1="12" y1="2" x2="12" y2="12"></line></svg>
+                    </div>
                     <h4 class="font-black uppercase tracking-widest text-emerald-400 text-xs">32A Contactors</h4>
-                    <p class="text-slate-400 text-sm px-4">Heavy-duty industrial switching components to handle large loads safely.</p>
+                    <p class="text-slate-400 text-sm px-4">Heavy-duty components for safe large load switching.</p>
                 </div>
                 <div class="space-y-4 tech-card group">
-                    <div class="h-32 flex items-center justify-center p-4 tech-icon"><svg class="w-16 h-16 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="16" rx="2"></rect></svg></div>
+                    <div class="h-32 flex items-center justify-center p-4 tech-icon transition-all duration-500 rounded-3xl">
+                        <svg class="w-16 h-16 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="16" rx="2"></rect></svg>
+                    </div>
                     <h4 class="font-black uppercase tracking-widest text-emerald-400 text-xs">RFID Tech</h4>
-                    <p class="text-slate-400 text-sm px-4">Rapid 13.56MHz matrix card detection for authorized energy access.</p>
+                    <p class="text-slate-400 text-sm px-4">13.56MHz matrix card detection for energy control.</p>
                 </div>
                 <div class="space-y-4 tech-card group">
-                    <div class="h-32 flex items-center justify-center p-4 tech-icon"><svg class="w-16 h-16 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect></svg></div>
+                    <div class="h-32 flex items-center justify-center p-4 tech-icon transition-all duration-500 rounded-3xl">
+                        <svg class="w-16 h-16 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect></svg>
+                    </div>
                     <h4 class="font-black uppercase tracking-widest text-emerald-400 text-xs">OLED Status</h4>
-                    <p class="text-slate-400 text-sm px-4">External digital display for warden monitoring without room intrusion.</p>
+                    <p class="text-slate-400 text-sm px-4">External status display for efficient warden monitoring.</p>
                 </div>
             </div>
         </div>
@@ -79,36 +89,58 @@
 
     <section class="py-24 bg-white overflow-hidden no-print">
         <div class="max-w-4xl mx-auto px-6 text-center relative">
-            <h2 class="text-4xl font-black mb-12 tracking-tight italic text-slate-900">Client <span class="text-emerald-600 font-black">Testimonials</span></h2>
+            <h2 class="text-4xl font-black mb-12 tracking-tight italic">Client <span class="text-emerald-600 font-black">Testimonials</span></h2>
             <div class="overflow-hidden">
                 <div class="testimonial-container" id="slider">
                     <div class="testimonial-slide">
                         <div class="text-emerald-500 mb-6 flex justify-center space-x-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                        <p class="text-2xl font-bold text-slate-800 italic leading-relaxed">"Unprecedented 30% reduction in electricity overhead within just two months."</p>
+                        <p class="text-2xl font-bold text-slate-800 italic leading-relaxed">"30% reduction in utility overhead within just two months. A lucrative long-term investment."</p>
                         <p class="mt-8 font-black uppercase tracking-widest text-xs text-slate-400">— Mr. Azman, Financial Officer</p>
                     </div>
+                    <div class="testimonial-slide">
+                        <div class="text-emerald-500 mb-6 flex justify-center space-x-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                        <p class="text-2xl font-bold text-slate-800 italic leading-relaxed">"Eradicated fire hazards from ceiling fans. Affords our maintenance team invaluable operational relief."</p>
+                        <p class="mt-8 font-black uppercase tracking-widest text-xs text-slate-400">— Mr. Wong, Facility Management</p>
+                    </div>
+                    <div class="testimonial-slide">
+                        <div class="text-emerald-500 mb-6 flex justify-center space-x-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                        <p class="text-2xl font-bold text-slate-800 italic leading-relaxed">"Sophisticated management tool. Prevents unauthorized exploitation of utilities."</p>
+                        <p class="mt-8 font-black uppercase tracking-widest text-xs text-slate-400">— Madam Aisyah, Chief Warden</p>
+                    </div>
+                    <div class="testimonial-slide">
+                        <div class="text-emerald-500 mb-6 flex justify-center space-x-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                        <p class="text-2xl font-bold text-slate-800 italic leading-relaxed">"Elevated institutional prestige. Secured our 'Smart Green Campus' recognition."</p>
+                        <p class="mt-8 font-black uppercase tracking-widest text-xs text-slate-400">— Dr. Razak, Campus Director</p>
+                    </div>
+                    <div class="testimonial-slide">
+                        <div class="text-emerald-500 mb-6 flex justify-center space-x-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                        <p class="text-2xl font-bold text-slate-800 italic leading-relaxed">"A foolproof safeguard. Automatically deactivates power upon card removal, protecting students from penalties."</p>
+                        <p class="mt-8 font-black uppercase tracking-widest text-xs text-slate-400">— Danial, JPP KMKK</p>
+                    </div>
                 </div>
+            </div>
+            <div class="flex justify-center mt-10 space-x-3">
+                <button onclick="moveSlide(-1)" class="w-10 h-10 rounded-full border border-slate-200 flex items-center justify-center hover:bg-emerald-600 hover:text-white transition"><i class="fas fa-chevron-left"></i></button>
+                <button onclick="moveSlide(1)" class="w-10 h-10 rounded-full border border-slate-100 flex items-center justify-center hover:bg-emerald-600 hover:text-white transition"><i class="fas fa-chevron-right"></i></button>
             </div>
         </div>
     </section>
 
     <div id="orderModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4">
         <div class="absolute inset-0 modal-overlay no-print" onclick="closeModal()"></div>
-        <div class="bg-white w-full max-w-2xl rounded-[3.5rem] shadow-2xl relative z-10 overflow-hidden animate-pop max-h-[95vh] overflow-y-auto">
+        <div class="bg-white w-full max-w-2xl rounded-[3.5rem] shadow-2xl relative z-10 overflow-hidden modal-animate max-h-[95vh] overflow-y-auto">
             <div class="p-8 md:p-12">
-                
-                <div id="step-1-form">
-                    <div class="text-center mb-8"><h2 class="text-3xl font-black italic uppercase">Step 1: <span class="text-emerald-600 font-black">Configuration</span></h2></div>
+                <div id="step-1-form" class="step-transition">
+                    <div class="text-center mb-8"><h2 class="text-3xl font-black italic uppercase">Step 1: <span class="text-emerald-600 font-black">Config</span></h2></div>
                     <div class="space-y-6">
                         <div class="space-y-2">
-                            <label class="text-[10px] font-black uppercase text-slate-400 tracking-widest ml-2">Number of Rooms</label>
+                            <label class="text-[10px] font-black uppercase text-slate-400 tracking-widest ml-2">Rooms</label>
                             <div class="flex items-center space-x-4 bg-slate-50 p-2 rounded-2xl border-2 border-slate-50">
-                                <button type="button" onclick="updateRooms(-1)" class="w-12 h-12 bg-white rounded-xl shadow-sm text-slate-400 hover:text-emerald-600 font-bold"><i class="fas fa-minus"></i></button>
+                                <button type="button" onclick="updateRooms(-1)" class="w-12 h-12 bg-white rounded-xl shadow-sm hover:text-emerald-600"><i class="fas fa-minus"></i></button>
                                 <input type="number" id="roomQty" value="1" min="1" class="bg-transparent text-center font-black text-xl w-full outline-none" onchange="calculateGrandTotal()">
-                                <button type="button" onclick="updateRooms(1)" class="w-12 h-12 bg-white rounded-xl shadow-sm text-slate-400 hover:text-emerald-600 font-bold"><i class="fas fa-plus"></i></button>
+                                <button type="button" onclick="updateRooms(1)" class="w-12 h-12 bg-white rounded-xl shadow-sm hover:text-emerald-600"><i class="fas fa-plus"></i></button>
                             </div>
                         </div>
-                        
                         <div class="custom-dropdown">
                             <div class="dropdown-selected" onclick="toggleDropdown('pkgOptions')"><span id="pkgValue">STANDARD Pack - RM 220/unit</span><i class="fas fa-chevron-down text-emerald-600"></i></div>
                             <div class="dropdown-options" id="pkgOptions">
@@ -117,98 +149,72 @@
                                 <div class="dropdown-option" onclick="selectPkg('HEAVY-DUTY', 350, 6)">HEAVY-DUTY Pack (6-8 Pax) - RM 350/unit</div>
                             </div>
                         </div>
-
-                        <div class="bg-slate-50 p-6 rounded-3xl space-y-4 shadow-inner">
+                        <div class="bg-slate-50 p-6 rounded-3xl space-y-4">
                             <div class="flex items-center justify-between">
-                                <div class="flex items-center space-x-3">
-                                    <i class="fas fa-id-card text-emerald-600"></i>
-                                    <div>
-                                        <p class="text-xs font-black uppercase">Complimentary Custom RFID Lanyards</p>
-                                        <p class="text-[8px] text-emerald-600 italic font-bold">Exclusive EcoStay x [Your College Name]</p>
-                                    </div>
-                                </div>
-                                <div class="flex items-center space-x-4 bg-white p-2 rounded-xl">
-                                    <button type="button" onclick="updateLanyard(-1)" class="w-6 h-6 text-slate-300 hover:text-emerald-600"><i class="fas fa-minus"></i></button>
-                                    <span id="l-qty" class="font-black text-sm text-slate-900">4</span>
-                                    <button type="button" onclick="updateLanyard(1)" class="w-6 h-6 text-slate-300 hover:text-emerald-600"><i class="fas fa-plus"></i></button>
-                                </div>
+                                <div class="flex items-center space-x-3"><i class="fas fa-id-card text-emerald-600"></i><div><p class="text-xs font-black uppercase">Custom Lanyards</p><p class="text-[8px] text-emerald-600 font-bold">Exclusive EcoStay x [Your College Name]</p></div></div>
+                                <div class="flex items-center space-x-4 bg-white p-2 rounded-xl"><button type="button" onclick="updateLanyard(-1)" class="w-6 h-6 text-slate-300 hover:text-emerald-600"><i class="fas fa-minus"></i></button><span id="l-qty" class="font-black text-sm">4</span><button type="button" onclick="updateLanyard(1)" class="w-6 h-6 text-slate-300 hover:text-emerald-600"><i class="fas fa-plus"></i></button></div>
                             </div>
                             <label class="flex items-center justify-between cursor-pointer"><div class="flex items-center space-x-3"><i class="fas fa-shield-alt text-emerald-600"></i><p class="text-sm font-black italic">2-Year Warranty (+RM100/room)</p></div><input type="checkbox" id="w-check" onchange="calculateGrandTotal()" class="w-5 h-5 accent-emerald-600"></label>
                             <label class="flex items-center justify-between opacity-80 cursor-not-allowed"><div class="flex items-center space-x-3"><i class="fas fa-file-contract text-emerald-600"></i><p class="text-sm font-black italic">Free 3-Month Energy Audit Report</p></div><input type="checkbox" checked disabled class="w-5 h-5 accent-emerald-600"></label>
                         </div>
-
-                        <div class="bg-emerald-900 p-6 rounded-[2rem] text-white flex justify-between items-center shadow-xl">
-                            <div><p class="text-[10px] font-black uppercase tracking-widest text-emerald-300 mb-1">Estimated Total</p><p id="live-total" class="text-3xl font-black">RM 0.00</p></div>
+                        <div class="grid grid-cols-2 gap-3">
+                            <label class="cursor-pointer"><input type="radio" name="payType" value="full" checked onchange="toggleInstallment(false)" class="hidden peer"><div class="p-4 bg-slate-50 rounded-2xl border-2 border-slate-50 peer-checked:border-emerald-500 text-center font-black uppercase text-[10px] tracking-widest text-slate-400 peer-checked:text-emerald-600">Full Pay</div></label>
+                            <label class="cursor-pointer"><input type="radio" name="payType" value="inst" onchange="toggleInstallment(true)" class="hidden peer"><div class="p-4 bg-slate-50 rounded-2xl border-2 border-slate-50 peer-checked:border-emerald-500 text-center font-black uppercase text-[10px] tracking-widest text-slate-400 peer-checked:text-emerald-600">Installment</div></label>
                         </div>
-                        <button onclick="goToStep2()" class="w-full bg-emerald-600 text-white py-5 rounded-2xl font-black uppercase tracking-widest hover:bg-emerald-700 transition">Next: Billing Details</button>
+                        <div id="installment-ui" class="hidden">
+                            <div class="custom-dropdown">
+                                <div class="dropdown-selected" onclick="toggleDropdown('durOptions')"><span id="durValue">12 Months</span><i class="fas fa-chevron-down text-emerald-600"></i></div>
+                                <div class="dropdown-options" id="durOptions">
+                                    <div class="dropdown-option active" onclick="selectDuration(12)">12 Months</div>
+                                    <div class="dropdown-option" onclick="selectDuration(24)">24 Months</div>
+                                    <div class="dropdown-option" onclick="selectDuration(36)">36 Months</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-emerald-900 p-6 rounded-[2rem] text-white flex justify-between items-center shadow-xl">
+                            <div><p class="text-[10px] font-black uppercase tracking-widest text-emerald-300 mb-1" id="total-label">Estimated Total</p><p id="live-total" class="text-3xl font-black">RM 0.00</p></div>
+                        </div>
+                        <button onclick="goToStep2()" class="w-full bg-emerald-600 text-white py-5 rounded-2xl font-black uppercase tracking-widest hover:bg-emerald-700 transition shadow-lg">Next: Billing Details</button>
                     </div>
                 </div>
 
-                <div id="step-2-form" class="hidden animate-pop">
-                    <div class="text-center mb-8"><h2 class="text-3xl font-black italic uppercase">Step 2: <span class="text-emerald-600 font-black">Billing</span></h2></div>
+                <div id="step-2-form" class="hidden step-transition">
+                    <div class="text-center mb-8"><h2 class="text-3xl font-black italic uppercase">Step 2: <span class="text-emerald-600 font-black font-black font-black">Billing</span></h2></div>
                     <form onsubmit="event.preventDefault(); handleSubmit();" class="space-y-4">
-                        <input type="text" id="billName" required placeholder="Full Name" class="w-full px-6 py-4 rounded-2xl bg-slate-50 font-bold border-2 border-slate-50 outline-none transition">
-                        <input type="email" id="billEmail" required placeholder="Email Address" class="w-full px-6 py-4 rounded-2xl bg-slate-50 font-bold border-2 border-slate-50 outline-none transition">
-                        <input type="text" id="billInst" required placeholder="Institution/College Name" class="w-full px-6 py-4 rounded-2xl bg-slate-50 font-bold border-2 border-slate-50 outline-none transition">
-                        <textarea id="billAddr" required placeholder="Full Billing Address" class="w-full px-6 py-4 rounded-2xl bg-slate-50 font-bold border-2 border-slate-50 outline-none h-24 transition"></textarea>
+                        <input type="text" id="billName" required placeholder="Full Name" class="w-full px-6 py-4 rounded-2xl bg-slate-50 font-black border-2 border-slate-50 outline-none">
+                        <input type="email" id="billEmail" required placeholder="Email Address" class="w-full px-6 py-4 rounded-2xl bg-slate-50 font-black border-2 border-slate-50 outline-none">
+                        <input type="text" id="billInst" required placeholder="Institution Name" class="w-full px-6 py-4 rounded-2xl bg-slate-50 font-black border-2 border-slate-50 outline-none">
+                        <textarea id="billAddr" required placeholder="Full Billing Address" class="w-full px-6 py-4 rounded-2xl bg-slate-50 font-black border-2 border-slate-50 outline-none h-24"></textarea>
                         <div class="flex space-x-3">
-                            <button type="button" onclick="backToStep1()" class="w-1/3 border-2 border-slate-100 rounded-2xl font-black uppercase text-xs text-slate-300 transition">Back</button>
+                            <button type="button" onclick="backToStep1()" class="w-1/3 border-2 border-slate-100 rounded-2xl font-black uppercase text-xs text-slate-300 py-4">Back</button>
                             <button type="submit" class="w-2/3 bg-emerald-600 text-white py-5 rounded-2xl font-black uppercase tracking-widest shadow-lg">Generate Invoice</button>
                         </div>
                     </form>
                 </div>
 
-                <div id="invoice-area" class="hidden">
-                    <div id="invoice-print-area" class="bg-white p-10 rounded-[2.5rem] border border-slate-200">
-                        <div class="flex justify-between items-start mb-10 border-b pb-10 border-slate-100">
+                <div id="invoice-area" class="hidden step-transition">
+                    <div id="invoice-print-area" class="bg-white p-10 rounded-[2.5rem] border border-slate-100">
+                        <div class="flex justify-between items-start mb-8 border-b pb-8">
                             <div class="flex items-center space-x-4">
-                                <img src="logo-company.png" alt="Company Logo" class="h-16 w-auto object-contain" onerror="this.src='https://via.placeholder.com/150x50?text=LOGO+HERE'">
-                                <div>
-                                    <h1 class="text-2xl font-black text-emerald-900 uppercase tracking-tighter" style="color:#064e3b">RNSS COOPERATION</h1>
-                                    <p class="text-[8px] text-slate-400 font-bold uppercase tracking-widest mt-1">Industrial Energy Management Division</p>
-                                </div>
+                                <img src="logo-company.png" alt="Logo" class="h-14 w-auto object-contain" onerror="this.src='https://via.placeholder.com/150x50?text=ECOSTAY'">
+                                <div><h1 class="text-2xl font-black text-emerald-900 uppercase">ECOSTAY</h1><p class="text-[8px] text-slate-400 font-bold uppercase tracking-widest mt-1">Official Project Quotation</p></div>
                             </div>
-                            <div class="text-right text-[10px] font-bold uppercase text-slate-400">
-                                <p id="inv-id" class="text-slate-900 mb-1" style="color:#0f172a"></p>
-                                <p id="inv-date"></p>
+                            <div class="text-right text-[10px] font-bold uppercase text-slate-400 leading-tight">
+                                <p id="inv-id" class="text-slate-900 mb-1"></p><p id="inv-date"></p>
                             </div>
                         </div>
-
                         <div class="grid grid-cols-2 gap-8 mb-8 text-[10px]">
-                            <div>
-                                <p class="font-black text-emerald-600 uppercase mb-2 tracking-widest">Billed To:</p>
-                                <p id="out-name" class="font-black text-slate-900 text-sm" style="color:#0f172a"></p>
-                                <p id="out-inst" class="font-bold text-slate-700"></p>
-                                <p id="out-addr" class="text-slate-500 mt-1 leading-relaxed"></p>
-                                <p id="out-email" class="text-emerald-600 mt-1 italic font-black"></p>
-                            </div>
-                            <div class="text-right">
-                                <p class="font-black text-emerald-600 uppercase mb-2 tracking-widest">From:</p>
-                                <p class="font-black text-slate-900 text-sm" style="color:#0f172a">RNSS COOPERATION</p>
-                                <p class="text-slate-500">RNSS Corporation HQ, Penang</p>
-                                <p class="text-slate-500 mt-1">Official Project Vendor</p>
-                            </div>
+                            <div><p class="font-black text-emerald-600 mb-2 uppercase">Billed To:</p><p id="out-name" class="font-black text-slate-900"></p><p id="out-inst" class="font-bold text-slate-600"></p><p id="out-addr" class="text-slate-500 mt-1 leading-relaxed"></p><p id="out-email" class="text-emerald-600 mt-1 italic font-black"></p></div>
+                            <div class="text-right"><p class="font-black text-emerald-600 mb-2 uppercase">From:</p><p class="font-black text-slate-900 uppercase">ECOSTAY Operations</p><p class="text-slate-500">Industrial Park HQ, Penang</p><p class="text-slate-400 mt-1 italic font-bold">WhatsApp: Support Active</p></div>
                         </div>
-
                         <table class="w-full text-[10px] mb-8 border-collapse">
-                            <thead class="bg-slate-50 uppercase font-black text-emerald-900">
-                                <tr class="border-b border-slate-200">
-                                    <th class="text-left py-4 px-4">Description</th>
-                                    <th class="text-center py-4">Qty</th>
-                                    <th class="text-right py-4 px-4">Amount (RM)</th>
-                                </tr>
-                            </thead>
-                            <tbody id="invoice-rows" class="font-bold text-slate-700"></tbody>
+                            <thead class="bg-slate-50 uppercase font-black text-emerald-900"><tr><th class="text-left py-4 px-4">Description</th><th class="text-center py-4">Qty</th><th class="text-right py-4 px-4">Amount (RM)</th></tr></thead>
+                            <tbody id="invoice-rows" class="font-bold text-slate-700" style="color:#334155"></tbody>
                         </table>
-
-                        <div class="border-t-2 border-emerald-500 pt-6 flex justify-between items-center">
-                            <p class="text-sm font-black uppercase text-emerald-900">Grand Total</p>
-                            <p id="out-total" class="text-2xl font-black text-emerald-600"></p>
-                        </div>
+                        <div class="border-t-2 border-emerald-500 pt-6 flex justify-between items-center"><p class="text-sm font-black uppercase text-emerald-900" id="final-label">Grand Total</p><p id="out-total" class="text-2xl font-black text-emerald-600"></p></div>
                     </div>
-
                     <div class="flex flex-col space-y-3 mt-10 no-print">
-                        <button onclick="downloadOfficialPDF()" class="w-full bg-slate-900 text-white py-5 rounded-2xl font-black uppercase tracking-widest flex items-center justify-center shadow-lg"><i class="fas fa-file-pdf mr-2"></i> Save Official PDF</button>
+                        <button onclick="downloadOfficialPDF()" class="w-full bg-slate-900 text-white py-5 rounded-2xl font-black uppercase tracking-widest flex items-center justify-center shadow-lg hover:bg-black transition"><i class="fas fa-file-pdf mr-2"></i> Save Official PDF</button>
                         <button onclick="closeModal()" class="w-full border-2 border-slate-100 rounded-2xl font-black uppercase text-xs text-slate-300 py-3 transition hover:bg-slate-50">Finish</button>
                     </div>
                 </div>
