@@ -1,22 +1,12 @@
-/* Transitions & Animations */
-.modal-animate {
-    transition: transform 0.5s cubic-bezier(0.17, 0.67, 0.16, 0.99), opacity 0.5s ease;
-    animation: slideUp 0.6s cubic-bezier(0.17, 0.67, 0.16, 0.99);
-}
+/* Transitions & Glow */
+.modal-animate { transition: transform 0.5s cubic-bezier(0.17, 0.67, 0.16, 0.99), opacity 0.5s ease; animation: slideUp 0.6s cubic-bezier(0.17, 0.67, 0.16, 0.99); }
+@keyframes slideUp { from { opacity: 0; transform: scale(0.9) translateY(40px); } to { opacity: 1; transform: scale(1); } }
+.step-transition { animation: fadeIn 0.8s ease-out; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-@keyframes slideUp {
-    from { opacity: 0; transform: scale(0.9) translateY(40px); }
-    to { opacity: 1; transform: scale(1) translateY(0); }
-}
-
-.step-transition {
-    animation: fadeIn 0.8s ease-out;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
+/* Glow Interaction */
+.tech-card:hover .tech-icon { transform: translateY(-10px); background: rgba(16, 185, 129, 0.1); box-shadow: 0 0 30px rgba(16, 185, 129, 0.4); border: 1px solid rgba(16, 185, 129, 0.3); }
+.tech-icon { border: 1px solid transparent; transition: all 0.4s ease; }
 
 /* Custom Dropdowns */
 .custom-dropdown { position: relative; width: 100%; cursor: pointer; }
@@ -26,20 +16,18 @@
 .dropdown-option:hover { background: #ecfdf5; color: #059669; padding-left: 2rem; }
 .show { display: block; animation: fadeIn 0.2s ease-out; }
 
-/* Engineering Glow Effect */
-.tech-card:hover .tech-icon {
-    transform: translateY(-10px);
-    background: rgba(16, 185, 129, 0.1);
-    box-shadow: 0 0 30px rgba(16, 185, 129, 0.4);
-    border: 1px solid rgba(16, 185, 129, 0.3);
-}
-.tech-icon { border: 1px solid transparent; }
-
 /* Testimonials */
 .testimonial-container { display: flex; transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
 .testimonial-slide { min-width: 100%; padding: 20px; }
 
-/* Price Card Float */
-.price-card:hover { transform: translateY(-10px); }
-
-@media print { .no-print { display: none !important; } }
+/* Print Logic (Bulletproof) */
+@media print {
+    body { background: white !important; }
+    .no-print, nav, section, .modal-overlay { display: none !important; visibility: hidden !important; }
+    body * { visibility: hidden !important; }
+    #invoice-print-area, #invoice-print-area * { visibility: visible !important; display: block !important; opacity: 1 !important; color: black !important; }
+    #invoice-print-area { position: absolute !important; left: 0 !important; top: 0 !important; width: 100% !important; padding: 0 !important; border: none !important; box-shadow: none !important; }
+    table { display: table !important; width: 100% !important; border-collapse: collapse !important; }
+    tr { display: table-row !important; border-bottom: 1px solid #eee !important; }
+    th, td { display: table-cell !important; padding: 12px !important; }
+}
