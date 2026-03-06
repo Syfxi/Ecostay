@@ -84,10 +84,36 @@ function backToStep1() {
     document.getElementById('step-1-form').style.opacity = '1';
 }
 
-function handleSubmit() {
+async function handleSubmit() {
+    const scriptURL = https://script.google.com/macros/s/AKfycbyz3FKIuFAkZvpbt8igXurAeq7HULtc-eF8n0w_LTRbmSHACJSjeyfvTVvcTeHdx5xzmA/exec; // Paste URL dari Langkah 3 tadi
+    
+    // Ambil data untuk dihantar
+    const formData = new FormData();
+    formData.append('inv_id', document.getElementById('inv-id').innerText);
+    formData.append('name', document.getElementById('billName').value);
+    formData.append('email', document.getElementById('billEmail').value);
+    formData.append('phone', document.getElementById('billPhone').value);
+    formData.append('institution', document.getElementById('billInst').value);
+    formData.append('address', document.getElementById('billAddr').value);
+    formData.append('package', curK);
+    formData.append('rooms', document.getElementById('roomQty').value);
+    formData.append('total', document.getElementById('live-total').innerText);
+
+    // Hantar data secara senyap ke Google Sheets
+    try {
+        await fetch(scriptURL, { method: 'POST', body: formData });
+        console.log('Data successfully sent to Sheets!');
+    } catch (error) {
+        console.error('Error sending data:', error);
+    }
+
+    // Teruskan dengan paparan invois macam biasa
     const f2 = document.getElementById('step-2-form');
     f2.style.opacity = '0';
-    setTimeout(() => { f2.classList.add('hidden'); generateInvoice(); }, 400);
+    setTimeout(() => {
+        f2.classList.add('hidden');
+        generateInvoice();
+    }, 400);
 }
 
 function generateInvoice() {
