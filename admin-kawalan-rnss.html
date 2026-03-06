@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | RNSS CORPORATION</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .glass-card { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.3); }
+        body { background: #f0fdf4; }
+    </style>
+</head>
+<body class="p-4 md:p-8 font-sans text-slate-800">
+
+    <div class="max-w-7xl mx-auto flex justify-between items-center mb-10">
+        <div>
+            <h1 class="text-3xl font-black text-emerald-900 tracking-tighter uppercase italic">RNSS <span class="text-emerald-500">Admin</span></h1>
+            <p class="text-slate-500 font-bold text-xs uppercase tracking-widest mt-1">Operational Control Center</p>
+        </div>
+        <button onclick="fetchData()" class="bg-white p-3 rounded-2xl shadow-sm border border-slate-100 hover:text-emerald-600 transition">
+            <i class="fas fa-sync-alt mr-2"></i> Refresh Data
+        </button>
+    </div>
+
+    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+        <div class="glass-card p-8 rounded-[2.5rem] shadow-xl shadow-emerald-900/5">
+            <p class="text-xs font-black text-slate-400 uppercase tracking-widest mb-2">Total Orders</p>
+            <h2 id="stat-orders" class="text-5xl font-black text-emerald-900">0</h2>
+        </div>
+        <div class="glass-card p-8 rounded-[2.5rem] shadow-xl shadow-emerald-900/5">
+            <p class="text-xs font-black text-slate-400 uppercase tracking-widest mb-2">Installed Rooms</p>
+            <h2 id="stat-rooms" class="text-5xl font-black text-emerald-600 font-black">0</h2>
+        </div>
+        <div class="glass-card p-8 rounded-[2.5rem] shadow-xl shadow-emerald-900/5 bg-emerald-900 text-white">
+            <p class="text-[10px] font-black text-emerald-300 uppercase tracking-widest mb-2 font-black">Total Revenue (EST)</p>
+            <h2 id="stat-revenue" class="text-4xl font-black">RM 0.00</h2>
+        </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto glass-card rounded-[3rem] overflow-hidden shadow-2xl border-none">
+        <div class="p-8 border-b border-slate-50 flex justify-between items-center bg-white/50">
+            <h3 class="font-black uppercase tracking-widest text-sm">Recent Purchases</h3>
+            <div class="text-xs font-bold text-slate-400">Real-time database from Sheets</div>
+        </div>
+        <div class="overflow-x-auto">
+            <table class="w-full text-left">
+                <thead class="bg-slate-50/50 text-[10px] uppercase font-black tracking-widest text-slate-400">
+                    <tr>
+                        <th class="px-8 py-5 text-emerald-900">Institution</th>
+                        <th class="px-6 py-5">Representative</th>
+                        <th class="px-6 py-5">Phone</th>
+                        <th class="px-6 py-5">Package</th>
+                        <th class="px-6 py-5">Audit Status</th>
+                        <th class="px-8 py-5 text-right">Amount</th>
+                    </tr>
+                </thead>
+                <tbody id="order-rows" class="divide-y divide-slate-100 font-bold text-sm text-slate-700">
+                    </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        // MASUKKAN URL GOOGLE SHEET JSON KAU DI SINI
+        const SHEET_ID = '1f7Tszl3uRF4e5E2qD1z0ie1gEb7Bj8q0Q6NjfmjN3_c';
+        const API_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json`;
+
+        async function fetchData() {
+            try {
+                const response = await fetch(API_URL);
+                const text = await response.text();
+                // Clean up JSON response from Google Sheets
+                const json = JSON.parse(text.substr(47).slice(0, -2));
+                const rows = json.table.rows;
+
+                let tableHtml = '';
+                let totalRooms = 0;
+                let totalRevenue = 0;
+
+                rows.reverse().forEach(row => {
+                    const data = row.c;
+                    const inst = data[5]?.v || 'N/A';
+                    const name = data[2]?.v || 'N/A';
+                    const phone = data[4]?.v || 'N/A';
+                    const pkg = data[7]?.v || 'N/A';
+                    const rooms = data[8]?.v || 0;
+                    const totalStr = data[9]?.v || 'RM 0.00';
+                    const cleanTotal = parseFloat(totalStr.replace('RM ', '').replace(',', ''));
+
+                    totalRooms += parseInt(rooms);
+                    totalRevenue += cleanTotal;
+
+                    tableHtml += `
+                        <tr class="hover:bg-white/80 transition">
+                            <td class="px-8 py-6 font-black text-emerald-900 uppercase tracking-tighter italic text-lg">${inst}</td>
+                            <td class="px-6 py-6">${name}</td>
+                            <td class="px-6 py-6 text-emerald-600 font-black"><a href="https://wa.me/${phone.replace(/[^0-9]/g, '')}" target="_blank">${phone}</a></td>
+                            <td class="px-6 py-6"><span class="bg-emerald-50 text-emerald-700 px-3 py-1 rounded-full text-[10px] uppercase font-black">${pkg} (${rooms}R)</span></td>
+                            <td class="px-6 py-6">
+                                <span class="inline-flex items-center text-[10px] text-orange-500 uppercase font-black italic">
+                                    <i class="fas fa-clock mr-1"></i> Pending Audit
+                                </span>
+                            </td>
+                            <td class="px-8 py-6 text-right font-black text-slate-900">${totalStr}</td>
+                        </tr>
+                    `;
+                });
+
+                document.getElementById('order-rows').innerHTML = tableHtml;
+                document.getElementById('stat-orders').innerText = rows.length;
+                document.getElementById('stat-rooms').innerText = totalRooms;
+                document.getElementById('stat-revenue').innerText = `RM ${totalRevenue.toLocaleString(undefined, {minimumFractionDigits: 2})}`;
+
+            } catch (error) {
+                console.error('Error fetching data:', error);
+                document.getElementById('order-rows').innerHTML = '<tr><td colspan="6" class="p-10 text-center text-slate-400">Sila semak semula ID Google Sheet anda.</td></tr>';
+            }
+        }
+
+        // Load data on start
+        fetchData();
+    </script>
+</body>
+</html>
