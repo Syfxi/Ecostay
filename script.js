@@ -85,7 +85,7 @@ function backToStep1() {
 }
 
 async function handleSubmit() {
-    const scriptURL = https://script.google.com/macros/s/AKfycbyz3FKIuFAkZvpbt8igXurAeq7HULtc-eF8n0w_LTRbmSHACJSjeyfvTVvcTeHdx5xzmA/exec; // Paste URL dari Langkah 3 tadi
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbyz3FKIuFAkZvpbt8igXurAeq7HULtc-eF8n0w_LTRbmSHACJSjeyfvTVvcTeHdx5xzmA/exec'; // Paste URL dari Langkah 3 tadi
     
     // Ambil data untuk dihantar
     const formData = new FormData();
