@@ -1,74 +1,126 @@
-const pkgData = { "LITE": 150, "STANDARD": 220, "HEAVY-DUTY": 350 };
-let curK = "STANDARD", curPrice = 220, rQty = 1, sIdx = 0;
-const scriptURL = 'https://script.google.com/macros/s/AKfycby4sgZ0XV9GEmX8fqaBYBF8SubMJ4utZpu4htgTurIQ82lurlt3VtVk7oWv03ikWf3ldQ/execPT_KAU'; // Sila ganti dengan URL Web App anda
+const pkgData = { "LITE": { p: 150, f: 2 }, "STANDARD": { p: 220, f: 4 }, "HEAVY-DUTY": { p: 350, f: 6 } };
+let curK = "STANDARD", lQty = 4, isI = false, iD = 12, sIdx = 0;
 
-function openModal(k, p) {
-    curK = k; curPrice = p; rQty = 1;
+function moveSlide(n) {
+    const s = document.getElementById('slider');
+    if (!s) return;
+    sIdx = (sIdx + n + 5) % 5;
+    s.style.transform = `translateX(-${sIdx * 100}%)`;
+}
+setInterval(() => moveSlide(1), 6000);
+
+function openModal(k, p, f) {
+    curK = k; lQty = f;
     document.getElementById('pkgValue').innerText = `${k} Pack - RM ${p}/unit`;
+    document.getElementById('l-qty').innerText = lQty;
     document.getElementById('roomQty').value = 1;
+    document.getElementById('w-check').checked = false;
     calculateGrandTotal();
-    document.getElementById('orderModal').classList.remove('hidden');
+    setTimeout(() => { document.getElementById('orderModal').classList.remove('hidden'); backToStep1(); }, 300);
 }
 
 function closeModal() { document.getElementById('orderModal').classList.add('hidden'); }
+function toggleDropdown(id) { document.getElementById(id).classList.toggle('show'); }
+
+function selectPkg(k, p, f) {
+    curK = k; lQty = f;
+    document.getElementById('pkgValue').innerText = `${k} Pack - RM ${p}/unit`;
+    document.getElementById('l-qty').innerText = lQty;
+    document.querySelectorAll('.dropdown-options').forEach(o => o.classList.remove('show'));
+    calculateGrandTotal();
+}
+
+function selectDuration(m) {
+    iD = m;
+    document.getElementById('durValue').innerText = `${m} Months`;
+    document.querySelectorAll('.dropdown-options').forEach(o => o.classList.remove('show'));
+    calculateGrandTotal();
+}
 
 function updateRooms(v) {
-    rQty = Math.max(1, rQty + v);
-    document.getElementById('roomQty').value = rQty;
+    const el = document.getElementById('roomQty');
+    el.value = Math.max(1, parseInt(el.value) + v);
+    calculateGrandTotal();
+}
+
+function updateLanyard(v) {
+    lQty = Math.max(0, lQty + v);
+    document.getElementById('l-qty').innerText = lQty;
+    calculateGrandTotal();
+}
+
+function toggleInstallment(v) {
+    isI = v;
+    document.getElementById('installment-ui').classList.toggle('hidden', !v);
+    document.getElementById('total-label').innerText = v ? 'Monthly Commitment' : 'Estimated Total';
     calculateGrandTotal();
 }
 
 function calculateGrandTotal() {
-    let total = curPrice * rQty;
+    const rQ = parseInt(document.getElementById('roomQty').value);
+    const pkg = pkgData[curK];
+    let perR = pkg.p;
+    let extraL = Math.max(0, lQty - pkg.f);
+    perR += (extraL * 5); 
+    if(document.getElementById('w-check').checked) perR += 100;
+    let total = perR * rQ;
+    if(isI) total = total / iD;
     document.getElementById('live-total').innerText = `RM ${total.toFixed(2)}`;
-    return `RM ${total.toFixed(2)}`;
+    return total;
 }
 
-function goToStep2() {
-    document.getElementById('step-1-form').classList.add('hidden');
-    document.getElementById('step-2-form').classList.remove('hidden');
+function goToStep2() { 
+    const f1 = document.getElementById('step-1-form');
+    f1.style.opacity = '0';
+    setTimeout(() => { f1.classList.add('hidden'); document.getElementById('step-2-form').classList.remove('hidden'); document.getElementById('step-2-form').style.opacity = '1'; }, 400);
 }
 
-async function handleSubmit() {
-    const invID = `RNSS-INV-${Date.now()}`;
-    const totalRM = calculateGrandTotal();
-    
-    const params = new URLSearchParams({
-        inv_id: invID,
-        name: document.getElementById('billName').value,
-        phone: document.getElementById('billPhone').value,
-        institution: document.getElementById('billInst').value,
-        address: document.getElementById('billAddr').value,
-        package: curK,
-        rooms: rQty,
-        total: totalRM
-    });
-
-    // Hantar ke Google Sheets
-    fetch(scriptURL, { method: 'POST', body: params, mode: 'no-cors' });
-
-    // Papar Invois
-    document.getElementById('inv-id').innerText = invID;
-    document.getElementById('out-name').innerText = document.getElementById('billName').value;
-    document.getElementById('out-inst').innerText = document.getElementById('billInst').value;
-    document.getElementById('out-total').innerText = totalRM;
-
+function backToStep1() {
     document.getElementById('step-2-form').classList.add('hidden');
+    document.getElementById('invoice-area').classList.add('hidden');
+    document.getElementById('step-1-form').classList.remove('hidden');
+    document.getElementById('step-1-form').style.opacity = '1';
+}
+
+function handleSubmit() {
+    const f2 = document.getElementById('step-2-form');
+    f2.style.opacity = '0';
+    setTimeout(() => { f2.classList.add('hidden'); generateInvoice(); }, 400);
+}
+
+function generateInvoice() {
+    const rQ = parseInt(document.getElementById('roomQty').value);
+    const total = calculateGrandTotal();
+    const date = new Date();
+    document.getElementById('inv-id').innerText = `INV-${date.getFullYear()}-${Math.floor(Math.random()*9000+1000)}`;
+    document.getElementById('inv-date').innerText = date.toLocaleDateString('en-GB');
+    document.getElementById('out-name').innerText = document.getElementById('billName').value;
+    document.getElementById('out-email').innerText = document.getElementById('billEmail').value;
+    document.getElementById('out-inst').innerText = document.getElementById('billInst').value;
+    document.getElementById('out-addr').innerText = document.getElementById('billAddr').value;
+    document.getElementById('out-total').innerText = `RM ${total.toFixed(2)}`;
+    document.getElementById('final-label').innerText = isI ? `Monthly Payment (${iD}m)` : 'Grand Total';
+
+    let rows = `<tr style="border-bottom:1px solid #eee"><td style="padding:12px">${curK} Industrial Smart Unit</td><td style="text-align:center">${rQ}</td><td style="text-align:right;padding:12px">RM ${(pkgData[curK].p * rQ).toFixed(2)}</td></tr>`;
+    let extraL = Math.max(0, lQty - pkgData[curK].f);
+    if(extraL > 0) rows += `<tr style="border-bottom:1px solid #eee"><td style="padding:12px">Extra Lanyards (Custom Branded)</td><td style="text-align:center">${extraL * rQ}</td><td style="text-align:right;padding:12px">RM ${(extraL * 5 * rQ).toFixed(2)}</td></tr>`;
+    if(document.getElementById('w-check').checked) rows += `<tr style="border-bottom:1px solid #eee"><td style="padding:12px">Extended Warranty (2-Year)</td><td style="text-align:center">${rQ}</td><td style="text-align:right;padding:12px">RM ${(100 * rQ).toFixed(2)}</td></tr>`;
+    rows += `<tr><td style="padding:12px">3-Month Energy Audit Report</td><td style="text-align:center">${rQ}</td><td style="text-align:right;padding:12px">FREE</td></tr>`;
+
+    document.getElementById('invoice-rows').innerHTML = rows;
     document.getElementById('invoice-area').classList.remove('hidden');
+    document.getElementById('invoice-area').style.opacity = '1';
 }
 
-function moveSlide(n) {
-    const s = document.getElementById('slider');
-    sIdx = (sIdx + n + 2) % 2; // Mengikut bilangan testimoni
-    s.style.transform = `translateX(-${sIdx * 100}%)`;
+function downloadOfficialPDF() {
+    const element = document.getElementById('invoice-print-area');
+    const opt = {
+        margin: 10, filename: 'RNSS_OFFICIAL_INVOICE.pdf',
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 3, useCORS: true, letterRendering: true },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+    };
+    html2pdf().set(opt).from(element).save();
 }
 
-async function snapAndDownloadPDF() {
-    const { jsPDF } = window.jspdf;
-    const element = document.getElementById('invoice-snap-area');
-    const canvas = await html2canvas(element, { scale: 2 });
-    const imgData = canvas.toDataURL('image/png');
-    const pdf = new jsPDF('p', 'mm', 'a4');
-    pdf.addImage(imgData, 'PNG', 10, 10, 190, 0);
-    pdf.save(`RNSS_INVOICE.pdf`);
-}
+window.onclick = function(e) { if (!e.target.closest('.custom-dropdown')) { document.querySelectorAll('.dropdown-options').forEach(o => o.classList.remove('show')); } }
